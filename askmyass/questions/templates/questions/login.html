@@ -1,0 +1,30 @@
+{% extends "questions/gen_temp.html" %}
+{% block content %}<!--Filling-->
+{% if not user.is_authenticated %}
+<div class="container">
+  <div class="row">
+    <!--Login-->
+    <div class="col-sm-9">
+      <h3>Логин</h3>
+      {% if error_message %}<p><strong><font color="#FF0000">{{ error_message }}</font></strong></p>{% endif %}
+      <form action="/login/" method="POST">
+        {% csrf_token %}
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Логин" name="usernameField" value="{% if form.data %}{{form.usernameField.data}}{% endif %}">
+        </div><p>
+
+        <div class="input-group">
+          <input type="password" class="form-control" placeholder="Пароль" name="passwordField" value="">
+        </div><p>
+
+        <div class="input-group">
+          <button type="submit" class="form-control">Войти</button>
+        </div><p>
+      </form>
+      <h4><a href="/signup">Душара?</a></h4>
+    </div>
+    <!--/Login-->
+    {% include "questions/Ttags.html" %}
+</div>
+{% endif %}
+{% endblock content %}

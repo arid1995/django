@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-sm-3">
+      <img src="/uploads/{{question.author.avatar}}" class="img-responsive img-rounded">
+      {% if user.is_authenticated %}
+      <!--likes-->
+      <div class="row">
+        <div class="col-sm-3">
+          <a href="#">
+            <img src="/lois.png" class="img-responsive img-circle like">
+          </a>
+        </div>
+        <div class="col-sm-6">
+          <div class="like-count">{{question.votes}}</div>
+        </div>
+        <div class="col-sm-3">
+          <a href="#">
+            <img src="/dislois.png" class="img-responsive img-circle like">
+          </a>
+        </div>
+      </div>
+      <!--/likes-->
+      {% endif %}
+    </div>
+    <div class="col-sm-7">
+      <div class="row">
+        <div class="col-sm-12 question" onclick="location.href='/question/{{question.id}}'">
+          {{question.title}}
+        </div>
+      </div>
+      {{question.text}}
+    </div>
+    <div class="col-sm-2">
+          {{question.added_at}}<p>
+          {% for tag in question.tag.all %}
+          	<a href="/tag/{{tag.name}}">{{tag.name}}<p></a>
+          {% endfor %}
+    </div>
+</div>
+<hr>

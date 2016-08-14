@@ -1,0 +1,8 @@
+{%block tags%}
+<div class="col-sm-3">
+    <h2>Тэги</h2>
+    {%for tag in tags%}
+    <a href="http://127.0.0.1/tag/{{tag.name}}">{{tag.name}}</a>
+    {%endfor%}
+</div>
+{%endblock tags%}

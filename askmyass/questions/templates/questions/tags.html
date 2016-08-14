@@ -1,0 +1,56 @@
+{% extends "questions/gen_temp.html" %}
+
+{% block title %}
+<title>Вопрос</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9">
+{% include "questions/Tquestion.html" %}
+{% for ans in answers %}
+      <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-11 richtig">
+        <div class="row">
+          <div class="col-sm-3">
+            <img src="/uploads{{ans.author.avatar}}" class="img-responsive img-rounded">
+            <!--likes-->
+            <div class="row">
+              <div class="col-sm-3">
+                <a href="#">
+                  <img src="/lois.png" class="img-responsive img-circle like">
+                </a>
+              </div>
+              <div class="col-sm-6">
+                <div class="like-count">{{ans.votes}}</div>
+              </div>
+              <div class="col-sm-3">
+                <a href="#">
+                  <img src="/dislois.png" class="img-responsive img-circle like">
+                </a>
+              </div>
+            </div>
+            <!--/likes-->
+          </div>
+          <div class="col-sm-7">
+            {{ans.text}}
+          </div>
+          <div class="col-sm-2">
+            {{ans.added_at}}
+          </div>
+        </div>
+        <hr>
+      </div>
+    </div>
+{% endfor %}
+</div>
+{%include "questions/Ttags.html"%}
+</div>
+</div>
+{% endblock content %}
+
+{% block nav-main %}
+    <li class="active"><a href="http://127.0.0.1/" class="my-color-inverse">Главная<span class="sr-only"></span></a></li>
+{% endblock nav-main %}

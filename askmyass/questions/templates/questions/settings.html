@@ -1,0 +1,77 @@
+{% extends "questions/gen_temp.html" %}
+
+{% block content %}
+{% if user.is_authenticated %}
+{{ user.profile.avatar }}
+<!--Filling-->
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9">
+      <h2>Профиль {{user.username}}</h2>
+      {% if error_message %}<p><strong><font color="#FF0000">{{ error_message }}</font></strong></p>{% endif %}
+      <form enctype="multipart/form-data" action="/settings/" method="POST">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-sm-2">
+            <h4>Имейл</h4>
+          </div>
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="text" name="emailField" class="form-control" value="{% if form.emailField.data %}{{form.emailField.data}}{%endif%}">
+            </div><p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-2">
+            <h4>Имя</h4>
+          </div>
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="text" name="firstNameField" class="form-control" value="{% if form.firstNameField.data %}{{form.firstNameField.data}}{%endif%}">
+            </div><p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-2">
+            <h4>Фотка</h4>
+          </div>
+          <div class="col-sm-10">
+            <img src="/uploads/{{profile.avatar.url}}" class="img-responsive img-rounded" width="200px" height="200px">
+            <p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-2">
+            <h4>Новая фотка</h4>
+          </div>
+          <div class="col-sm-10">
+            <div class="input-group">
+              <div class="file_upload">
+                <button type="button" class="btn">Выбрать</button>
+                  <div>Файл не выбран</div>
+                  <input type="file" name="imageField" value="{% if form.imageField.data %}{{form.imageField.data}}{%endif%}">
+                </div>
+            </div>
+            <p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-2">
+          </div>
+          <div class="col-sm-10">
+            <button type="submit" class="btn">Изменить</button>
+            <p>
+          </div>
+        </div>
+
+      </form>
+    </div>
+    {% include "questions/Ttags.html" %}
+  </div>
+</div>
+{% endif %}
+{% endblock content %}

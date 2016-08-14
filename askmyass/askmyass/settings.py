@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'questions'
 ]
+
+MEDIA_ROOT = '/home/farid/Yandex.Disk/Workspace/django/askmyass/uploads'
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,7 +58,7 @@ ROOT_URLCONF = 'askmyass.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+	'DIRS': ['/home/farid/Yandex.Disk/Workspace/django/askmyass/questions/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

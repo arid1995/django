@@ -1,0 +1,43 @@
+{% extends "questions/gen_temp.html" %}
+
+{% block title %}
+<title>Спросить</title>
+{% endblock title %}
+
+{% block nav-main %}
+    <li class=""><a href="/" class="my-color">Главная<span class="sr-only"></span></a></li>
+{% endblock nav-main %}
+
+{% block nav-ask %}
+    <li class="active"><a href="/ask" class="my-color-inverse">Спросить<span class="sr-only"></span></a></li>
+{% endblock nav-ask %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9">
+    <!--Question form-->
+      <h3>Вопрос</h3>
+      {% if error_message %}<p><strong><font color="#FF0000">{{ error_message }}</font></strong></p>{% endif %}
+      <form action="/ask/" method="POST">
+      {% csrf_token %}
+        <div class="input-group">
+          <input type="text" class="form-control question-field-alignment" placeholder="Заголовок" name="titleField" value="{% if form.titleField.data %}{{form.titleField.data}}{%endif%}">
+        </div><p>
+
+        <div class="input-group">
+          <textarea rows="10" class="question-field-alignment" name="questionTextField">{% if form.questionTextField.data %}{{form.questionTextField.data}}{%endif%}</textarea>
+        </div><p>
+
+        <div class="input-group">
+          <input type="text" class="form-control question-field-alignment" placeholder="Таги" name="tagsField" value="{% if form.tagsField.data %}{{form.tagsField.data}}{%endif%}">
+        </div><p>
+
+        <div class="input-group">
+          <button type="submit" class="form-control">Спросить</button>
+        </div><p>
+      </form>
+    </div>
+{%include "questions/Ttags.html"%}
+</div>
+{% endblock content %}

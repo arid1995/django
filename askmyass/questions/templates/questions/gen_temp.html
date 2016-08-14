@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% block title %}
+    <title>Main</title>
+    {% endblock title %}
+
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/my-style.css" rel="stylesheet">
+  </head>
+  <body class="dark-theme">
+
+<!--General container-->
+<div class="container">
+<!--Longass navbar-->
+<div class="navbar navbar-default navbar-inverse">
+</div><!--first offset-->
+<div class="navbar navbar-default navbar-fixed-top">
+<div class="row">
+<div class="col-sm-8">
+  <div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+      <a class="navbar-brand my-color" href="http://127.0.0.1/">AskMyAss.com</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+        {% block nav-main %}
+        <li><a href="http://127.0.0.1/" class="my-color">Главная<span class="sr-only"></span></a></li>
+        {% endblock nav-main %}
+
+        {% block nav-hot %}
+          <li><a href="http://127.0.0.1/hot/" class="my-color"><span class="glyphicon glyphicon-fire" aria-hidden="true"><span class="sr-only"></span></a></li>
+        {% endblock nav-hot %}
+
+        {% block nav-ask %}
+        <li><a href="http://127.0.0.1/ask" class="my-color">Спросить</a></li>
+        {% endblock nav-ask %}
+
+      </ul>
+      </div>
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control dark-theme my-color" placeholder="Искать">
+        </div>
+        <button type="submit" class="btn"><span class="glyphicon glyphicon-search" aria-hidden="true"></button>
+      </form>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+  {% if user.is_authenticated %}
+  <div class="col-sm-4">
+    <div class="row">
+      <div class="col-sm-4">
+        <img src="/uploads/{{profile.avatar.url}}" class="avatar">
+      </div>
+      <div class="col-sm-8">
+        <div class="user-name"><a href="/settings"> {{user.username}} </a></div>
+        <div class="options">
+          <a href="/settings"><span class="glyphicon glyphicon-cog" aria-hidden="true"></a><a href="/logout"><span class="glyphicon glyphicon-off" aria-hidden="true"></span></a></div>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <div class="margin-log">
+  <ul class="nav navbar-nav navbar-right">
+      <li><a href="/login">Войти</a></li>
+      <li><a href="/signup">Зарегаться</a></li>
+  </ul>
+  </div>
+  {% endif %}
+</div>
+</div>
+</div>
+<!--/Longass navbar-->
+
+<!--Filling-->
+{%block content%}
+{%endblock content%}
+
+{% block paginator %}
+  {% include "questions/Tpaginator.html" %}
+{% endblock paginator%}
+
+<hr>
+<footer class="footer">
+    <img src="http://lorempixel.com/1000/100/">
+</footer>
+</div>
+<!--/General container--> 
+
+  <h1></h1>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="static/js/bootstrap.min.js"></script>
+  </body>
+</html>

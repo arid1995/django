@@ -1,0 +1,68 @@
+{% extends "questions/gen_temp.html" %}
+
+{% block title %}
+<title>Вопрос</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9">
+{% include "questions/Tquestion.html" %}
+{% for ans in answers %}
+      <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-11 richtig">
+        <div class="row">
+          <div class="col-sm-3">
+            <img src="/uploads/{{ans.author.avatar}}" class="img-responsive img-rounded">
+            {% if user.is_authenticated %}
+            <!--likes-->
+            <div class="row">
+              <div class="col-sm-3">
+                <a href="#">
+                  <img src="/lois.png" class="img-responsive img-circle like">
+                </a>
+              </div>
+              <div class="col-sm-6">
+                <div class="like-count">{{ans.votes}}</div>
+              </div>
+              <div class="col-sm-3">
+                <a href="#">
+                  <img src="/dislois.png" class="img-responsive img-circle like">
+                </a>
+              </div>
+            </div>
+            <!--/likes-->
+            {% endif %}
+          </div>
+          <div class="col-sm-7">
+            {{ans.text}}
+          </div>
+          <div class="col-sm-2">
+            {{ans.added_at}}
+          </div>
+        </div>
+        <hr>
+      </div>
+    </div>
+{% endfor %}
+</div>
+{%include "questions/Ttags.html"%}
+</div>
+<center>
+<h3>Ответ</h3>
+  {% if error_message %}<p><strong><font color="#FF0000">{{ error_message }}</font></strong></p>{% endif %}
+  <form action="/question/{{question.id}}/" method="POST">
+  {% csrf_token %}
+    <div class="input-group">
+      <textarea rows="10" class="question-field-alignment" name="answerTextField"></textarea>
+    </div><p>
+
+    <div class="input-group">
+      <button type="submit" class="form-control">Ответить</button>
+    </div><p>
+  </form>
+</center>
+</div>
+{% endblock content %}

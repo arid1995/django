@@ -1,0 +1,101 @@
+{% extends "questions/gen_temp.html" %}
+
+{% block content %}
+{% if not user.is_authenticated %}
+<div class="container">
+  <div class="row">
+    <!--Login-->
+    <div class="col-sm-9">
+      <h2>Регистрация</h2>
+      {% if error_message %}<p><strong><font color="#FF0000">{{ error_message }}</font></strong></p>{% endif %}
+      <form enctype="multipart/form-data" action="/signup/" method="POST">
+        {% csrf_token%}
+        <div class="row">
+          <div class="col-sm-3">
+            <h4>Логин</h4>
+          </div>
+          <div class="col-sm-9">
+            <div class="input-group">
+              <input type="text" name="usernameField" class="form-control" value="{% if form.usernameField.data %}{{form.usernameField.data}}{%endif%}">
+            </div><p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3">
+            <h4>email</h4>
+          </div>
+          <div class="col-sm-9">
+            <div class="input-group">
+              <input type="text" name="emailField" class="form-control" value="{% if form.emailField.data %}{{form.emailField.data}}{%endif%}">
+            </div><p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3">
+            <h4>Имя</h4>
+          </div>
+          <div class="col-sm-9">
+            <div class="input-group">
+              <input type="text" name="firstNameField" class="form-control" value="{% if form.firstNameField.data %}{{form.firstNameField.data}}{%endif%}">
+            </div><p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3">
+            <h4>Пароль</h4>
+          </div>
+          <div class="col-sm-9">
+            <div class="input-group">
+              <input type="password" name="passwordField" class="form-control">
+            </div><p>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-sm-3">
+            <h4>Повтор пароля</h4>
+          </div>
+          <div class="col-sm-9">
+            <div class="input-group">
+              <input type="password" class="form-control" name="repeat">
+            </div><p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3">
+            <h4>Фотка</h4>
+          </div>
+          <div class="col-sm-9">
+            <div class="input-group">
+              <div class="file_upload">
+                <button type="button" class="btn">Выбрать</button>
+                  <div>Файл не выбран</div>
+                  <input type="file" name="imageField">
+                </div>
+            </div>
+            <p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3">
+          </div>
+          <div class="col-sm-9">
+            <button type="submit" class="btn">Зарегаться</button>
+            <p>
+          </div>
+        </div>
+
+      </form>
+    </div>
+    <!--/Login-->
+    {% include "questions/Ttags.html" %}
+  </div>
+</div>
+{% endif %}
+{% endblock content %}
